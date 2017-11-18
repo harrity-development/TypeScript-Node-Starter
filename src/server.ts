@@ -9,15 +9,15 @@ import * as logger from "morgan";
 import * as errorHandler from "errorhandler";
 import * as lusca from "lusca";
 import * as dotenv from "dotenv";
-import * as mongo from "connect-mongo";
+// import * as mongo from "connect-mongo";
 import * as flash from "express-flash";
 import * as path from "path";
-import * as mongoose from "mongoose";
+// import * as mongoose from "mongoose";
 import * as passport from "passport";
 import expressValidator = require("express-validator");
 
 
-const MongoStore = mongo(session);
+// const MongoStore = mongo(session);
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -47,12 +47,12 @@ const app = express();
  * Connect to MongoDB.
  */
 // mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 
-mongoose.connection.on("error", () => {
-  console.log("MongoDB connection error. Please make sure MongoDB is running.");
-  process.exit();
-});
+// mongoose.connection.on("error", () => {
+//   console.log("MongoDB connection error. Please make sure MongoDB is running.");
+//   process.exit();
+// });
 
 
 
@@ -71,10 +71,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-    autoReconnect: true
-  })
+  // store: new MongoStore({
+  //   url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+  //   autoReconnect: true
+  // })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
